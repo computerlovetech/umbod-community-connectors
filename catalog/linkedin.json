@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "id": "linkedin",
+  "name": "LinkedIn",
+  "version": "0.1.0",
+  "kind": "umbod-sdk-with-stdio-launcher",
+  "maintainer": "computerlovetech",
+  "source": "https://github.com/computerlovetech/umbod-community-connectors",
+  "documentation": "docs/linkedin.md",
+  "installation": {
+    "git_ref": "v0.1.0",
+    "executable": "umbod-community",
+    "arguments": [
+      "linkedin"
+    ],
+    "secret_environment_variable": "UMBOD_CONNECTOR_CONFIG"
+  },
+  "reference": {
+    "author": "Mark Ruvald",
+    "repository": "https://github.com/eisbaw/linkedin-rs",
+    "revision": "a7c8b40699d2cfa73aa3b1be665e505922070190"
+  },
+  "validation": {
+    "sdk": "0.1.0",
+    "protocol_tests": "mocked",
+    "stdio_discovery": "tested",
+    "live_provider": "unverified",
+    "desktop_gui": "unverified"
+  },
+  "tools": [
+    {
+      "name": "auth_status",
+      "side_effects": false
+    },
+    {
+      "name": "profile_me",
+      "side_effects": false
+    },
+    {
+      "name": "profile_view",
+      "side_effects": false
+    },
+    {
+      "name": "profile_visit",
+      "side_effects": true
+    },
+    {
+      "name": "profile_viewers",
+      "side_effects": false
+    },
+    {
+      "name": "feed_list",
+      "side_effects": false
+    },
+    {
+      "name": "feed_react",
+      "side_effects": true
+    },
+    {
+      "name": "feed_unreact",
+      "side_effects": true
+    },
+    {
+      "name": "feed_comment",
+      "side_effects": true
+    },
+    {
+      "name": "feed_post",
+      "side_effects": true
+    },
+    {
+      "name": "connections_list",
+      "side_effects": false
+    },
+    {
+      "name": "connections_invite",
+      "side_effects": true
+    },
+    {
+      "name": "connections_invitations",
+      "side_effects": false
+    },
+    {
+      "name": "connections_accept",
+      "side_effects": true
+    },
+    {
+      "name": "search_people",
+      "side_effects": false
+    },
+    {
+      "name": "search_jobs",
+      "side_effects": false
+    },
+    {
+      "name": "messages_list",
+      "side_effects": false
+    },
+    {
+      "name": "messages_read",
+      "side_effects": false
+    },
+    {
+      "name": "messages_send",
+      "side_effects": true
+    },
+    {
+      "name": "notifications_list",
+      "side_effects": false
+    }
+  ]
+}

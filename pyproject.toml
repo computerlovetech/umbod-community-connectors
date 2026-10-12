@@ -1,0 +1,44 @@
+[project]
+name = "umbod-community-connectors"
+version = "0.1.0"
+description = "Community LinkedIn and Nemlig connectors built with the Umbod Python SDK"
+readme = "README.md"
+requires-python = ">=3.14"
+license = "MIT"
+dependencies = [
+  "umbod @ git+https://github.com/computerlovetech/umbod.git@7e761248cf45ae157201e30ce7b49c1c25afba91#subdirectory=packages/umbod-sdk",
+  "httpx>=0.28.1,<1",
+  "mcp>=2.3.0,<3",
+]
+
+[project.scripts]
+umbod-community = "umbod_community_connectors.server:main"
+
+[project.entry-points."umbod.connectors"]
+linkedin = "umbod_community_connectors.linkedin:connector"
+nemlig = "umbod_community_connectors.nemlig:connector"
+
+[project.urls]
+Repository = "https://github.com/computerlovetech/umbod-community-connectors"
+
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/umbod_community_connectors"]
+
+[dependency-groups]
+dev = ["pytest>=9,<10", "ruff>=0.15,<1"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

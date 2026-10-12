@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "id": "nemlig",
+  "name": "Nemlig",
+  "version": "0.1.0",
+  "kind": "umbod-sdk-with-stdio-launcher",
+  "maintainer": "computerlovetech",
+  "source": "https://github.com/computerlovetech/umbod-community-connectors",
+  "documentation": "docs/nemlig.md",
+  "installation": {
+    "git_ref": "v0.1.0",
+    "executable": "umbod-community",
+    "arguments": [
+      "nemlig"
+    ],
+    "secret_environment_variable": "UMBOD_CONNECTOR_CONFIG"
+  },
+  "reference": {
+    "author": "Mark Ruvald",
+    "repository": "https://github.com/eisbaw/nemlig_cli",
+    "revision": "de1c26d30f4fffb3db32aa11c00df0286a127e8c"
+  },
+  "validation": {
+    "sdk": "0.1.0",
+    "protocol_tests": "mocked",
+    "stdio_discovery": "tested",
+    "live_provider": "unverified",
+    "desktop_gui": "unverified"
+  },
+  "tools": [
+    {
+      "name": "account_status",
+      "side_effects": false
+    },
+    {
+      "name": "search_products",
+      "side_effects": false
+    },
+    {
+      "name": "product_details",
+      "side_effects": false
+    },
+    {
+      "name": "basket_get",
+      "side_effects": false
+    },
+    {
+      "name": "basket_set_quantity",
+      "side_effects": true
+    },
+    {
+      "name": "order_history",
+      "side_effects": false
+    },
+    {
+      "name": "order_details",
+      "side_effects": false
+    }
+  ]
+}
