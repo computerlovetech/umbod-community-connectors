@@ -4,6 +4,8 @@ Inspired by Mark Ruvald's [linkedin-rs](https://github.com/eisbaw/linkedin-rs).
 
 ## Configuration
 
+Connector ID and Desktop launch argument: `linkedin`.
+
 Log into LinkedIn yourself. In browser developer tools, find cookies for `https://www.linkedin.com` and copy `li_at` and, preferably, `JSESSIONID`. Enter this JSON as the secret `UMBOD_CONNECTOR_CONFIG` environment variable in Umbod:
 
 ```json

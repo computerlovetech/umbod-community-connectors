@@ -4,6 +4,8 @@ Inspired by Mark Ruvald's [nemlig_cli](https://github.com/eisbaw/nemlig_cli).
 
 ## Configuration
 
+Connector ID and Desktop launch argument: `nemlig`.
+
 Enter this JSON as the secret `UMBOD_CONNECTOR_CONFIG` environment variable in Umbod Desktop:
 
 ```json

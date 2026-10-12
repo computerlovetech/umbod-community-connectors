@@ -1,7 +1,7 @@
 [project]
 name = "umbod-community-connectors"
 version = "0.1.0"
-description = "Community LinkedIn and Nemlig connectors built with the Umbod Python SDK"
+description = "Community-built connectors for bringing apps and services into Umbod"
 readme = "README.md"
 requires-python = ">=3.14"
 license = "MIT"

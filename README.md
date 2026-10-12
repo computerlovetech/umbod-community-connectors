@@ -1,8 +1,12 @@
 # Umbod community connectors
 
-Community-built **LinkedIn** and **Nemlig** connectors using the [Umbod Python SDK](https://github.com/computerlovetech/umbod/tree/main/packages/umbod-sdk). Each operation is a separate tool, so you choose permissions in Umbod.
+A shared home for community-built connectors that bring apps and services into [Umbod](https://github.com/computerlovetech/umbod). Find a connector, contribute one for a service you use, or improve an existing integration.
 
-**Shout-out to Mark Ruvald ([@eisbaw](https://github.com/eisbaw))** for the inspiration and protocol research in [linkedin-rs](https://github.com/eisbaw/linkedin-rs) and [nemlig_cli](https://github.com/eisbaw/nemlig_cli). These are independent Python implementations informed by his CLIs. Thank you, Mark!
+Connectors use the [Umbod Python SDK](https://github.com/computerlovetech/umbod/tree/main/packages/umbod-sdk), with each operation exposed as a separate tool so users control permissions in Umbod. Contributions for new services are welcome—see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Available connectors
+
+LinkedIn and Nemlig are the first connectors in the collection. Each connector has its own setup instructions and scope.
 
 | Connector | Tools | Functionality |
 | --- | ---: | --- |
@@ -11,9 +15,7 @@ Community-built **LinkedIn** and **Nemlig** connectors using the [Umbod Python S
 
 ## Status
 
-Initial implementation with mocked provider request tests and real local MCP stdio discovery tests. **Not yet verified against live LinkedIn or Nemlig accounts.** The providers' private endpoints can change; source parity does not guarantee current provider compatibility. [Exact scope and source revisions](docs/parity.md).
-
-Nemlig's meal planner, fridge/camera, local grocery lists, budgets, and Google Sheets import are intentionally excluded. Neither this connector nor the reference Nemlig CLI implements checkout.
+The initial connectors have mocked provider request tests and real local MCP stdio discovery tests. **Live provider compatibility is not yet verified.** Check each connector's documentation for supported operations, authentication requirements, and limitations. [Coverage and source revisions](docs/parity.md).
 
 ## Install for Umbod Desktop on macOS
 
@@ -27,23 +29,23 @@ uv tool dir --bin
 
 In Umbod Desktop, choose **Add connector → Local process (stdio)**:
 
-| Field | LinkedIn | Nemlig |
-| --- | --- | --- |
-| Name | LinkedIn Community | Nemlig Community |
-| Executable | Absolute path to `umbod-community` inside the bin directory printed above | Same executable |
-| Arguments (one per line) | `linkedin` | `nemlig` |
-| Authentication: environment variable name | `UMBOD_CONNECTOR_CONFIG` | `UMBOD_CONNECTOR_CONFIG` |
-| Authentication: secret value | Configuration JSON from [LinkedIn setup](docs/linkedin.md) | Configuration JSON from [Nemlig setup](docs/nemlig.md) |
+| Field | Value |
+| --- | --- |
+| Name | A name for your connection |
+| Executable | Absolute path to `umbod-community` inside the bin directory printed above |
+| Arguments (one per line) | The connector ID from its setup instructions |
+| Authentication: environment variable name | `UMBOD_CONNECTOR_CONFIG` |
+| Authentication: secret value | Configuration JSON described in the connector's setup instructions |
 
-Save the connector, check its account-status tool, and enable the tools you want. Umbod stores the secret environment value in Keychain and passes it to the local connector process. Configuration is never part of the model's tool arguments. There is no automatic browser sign-in in these connectors: they use session cookies for LinkedIn and an account login for Nemlig.
+Save the connector, use its status tool to check the connection, and enable the tools you want. Umbod stores the secret environment value in Keychain and passes it to the local connector process. Configuration is never part of the model's tool arguments. Authentication is connector-specific; follow its setup instructions. The initial connectors do not provide automatic browser sign-in.
 
-Write tools are present alongside read tools. There is no blanket read-only switch or generic HTTP tool. Use Umbod's per-tool permissions; enabling a write tool authorizes that capability within Umbod's policy. Tool annotations describe side effects but are not authorization checks. `profile_visit` registers a profile view even though its upstream request uses GET.
+Write tools are present alongside read tools. There is no blanket read-only switch or generic HTTP tool. Use Umbod's per-tool permissions; enabling a write tool authorizes that capability within Umbod's policy. Tool annotations describe side effects but are not authorization checks. Each connector documents which operations have side effects.
 
-Each account should be a separate connector entry with its own configuration. No connector credentials, account content, or tokens are written by this package to files. Nemlig sessions last for one tool call; LinkedIn cookies come from the saved configuration. Provider requests are not automatically retried, avoiding duplicate writes after uncertain failures.
+Each account should be a separate connector entry with its own configuration. No connector credentials, account content, or tokens are written by this package to files. Session behavior is documented per connector. Provider requests are not automatically retried, avoiding duplicate writes after uncertain failures.
 
 ## SDK use
 
-The distribution also publishes `linkedin` and `nemlig` in the standard `umbod.connectors` entry-point group. The plugin objects use the public SDK `Connector` interface, configuration models, configuration checks, and tool decorators. An SDK-compatible Umbod backend can discover the installed package through these entry points. For Enterprise, follow Umbod's [plugin bundle deployment guide](https://umbod.ai/docs/plugins/build-a-connector/); installing this tool environment does not install a plugin in an Enterprise backend.
+Connectors are also published in the standard `umbod.connectors` entry-point group. The plugin objects use the public SDK `Connector` interface, configuration models, configuration checks, and tool decorators. An SDK-compatible Umbod backend can discover the installed package through these entry points. For Enterprise, follow Umbod's [plugin bundle deployment guide](https://umbod.ai/docs/plugins/build-a-connector/); installing this tool environment does not install a plugin in an Enterprise backend.
 
 Desktop uses a small stdio launcher over the **same SDK tool definitions**. It requires no Desktop changes, catalog support, or custom plugin loader.
 
@@ -63,5 +65,9 @@ uv build
 ```
 
 Tests use synthetic credentials and deny live HTTP. See [CONTRIBUTING.md](CONTRIBUTING.md) to add or update a connector.
+
+## Acknowledgements
+
+**Shout-out to Mark Ruvald ([@eisbaw](https://github.com/eisbaw))** for the inspiration and protocol research in [linkedin-rs](https://github.com/eisbaw/linkedin-rs) and [nemlig_cli](https://github.com/eisbaw/nemlig_cli). The initial LinkedIn and Nemlig connectors are independent Python implementations informed by his CLIs. Thank you, Mark!
 
 Code in this repository is MIT licensed. No upstream source files are bundled. Attribution and inspected source revisions are recorded in [ACKNOWLEDGEMENTS.md](ACKNOWLEDGEMENTS.md).

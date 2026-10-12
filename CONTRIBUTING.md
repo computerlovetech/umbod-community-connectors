@@ -1,5 +1,7 @@
 # Contributing
 
+This repository welcomes connectors for any app or service that people want to use through Umbod. You can contribute a new integration, improve an existing connector, or help with documentation and compatibility testing.
+
 Add a connector directory under `src/umbod_community_connectors/`, documentation under `docs/`, and a descriptive entry under `catalog/`. Register the SDK plugin through `umbod.connectors` in `pyproject.toml` and add the desktop launcher entry in `server.py`.
 
 Use the public Umbod SDK configuration model, configuration check, and tool decorators. Every tool must have a specific operation and documented parameters, with an injected `configuration` parameter. Do not expose a generic HTTP request or arbitrary dispatch tool. Keep side effects separately permissionable and describe them clearly, including GET requests that change provider state.
